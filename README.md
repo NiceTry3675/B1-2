@@ -2,6 +2,10 @@
 
 제공 Linux 바이너리를 수정·디컴파일하지 않고 실행하여 장애별 Before/After 6회와 탐색 실행 2회의 증거를 수집했다. 2026-09-05 KST 실측 결과를 GitHub Issue 형식으로 정리했다.
 
+## 학습하기
+
+처음 읽는다면 [주니어 개발자를 위한 학습 가이드](LEARNING_GUIDE.md)부터 시작하세요. 프로세스·메모리·CPU·스레드·락 개념을 실제 장애 결과와 연결하고, 로그 읽기 연습과 확인 문제를 담았습니다.
+
 ## 제출 결과물
 
 - **제출용 PDF:** [system-incident-reports.pdf](output/pdf/system-incident-reports.pdf) (3개 이슈, 그래프, 보너스 분석, 원본 증거 ZIP 첨부)
