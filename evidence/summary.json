@@ -1,0 +1,249 @@
+[
+  {
+    "case": "oom/before",
+    "pid": 33,
+    "started_at": "2026-09-05T06:48:14.648+00:00",
+    "settings": {
+      "AGENT_HOME": "/work/runtime/oom/before",
+      "AGENT_PORT": "15034",
+      "AGENT_UPLOAD_DIR": "/work/runtime/oom/before/upload_files",
+      "AGENT_KEY_PATH": "/work/runtime/oom/before/api_keys",
+      "AGENT_LOG_DIR": "/work/runtime/oom/before/logs",
+      "MEMORY_LIMIT": "100",
+      "CPU_MAX_OCCUPY": "40",
+      "MULTI_THREAD_ENABLE": "false"
+    },
+    "binary": "/work/agent-app-leak/agent-leak-app-x86",
+    "command": [
+      "/work/agent-app-leak/agent-leak-app-x86"
+    ],
+    "observation_limit_seconds": 90,
+    "launcher_pid": 14,
+    "ended_at": "2026-09-05T06:48:26.060+00:00",
+    "elapsed_seconds": 11.412,
+    "returncode": -9,
+    "observer_stopped": false,
+    "observed_pids": [
+      14,
+      33
+    ],
+    "sample_count": 10,
+    "first_rss_kb": 18512,
+    "last_rss_kb": 95324,
+    "min_rss_kb": 18512,
+    "max_rss_kb": 95324,
+    "max_cpu": 4.0,
+    "mean_cpu": 1.1,
+    "first_sample": "2026-09-05T15:48:16+09:00",
+    "last_sample": "2026-09-05T15:48:25+09:00"
+  },
+  {
+    "case": "oom/after",
+    "pid": 34,
+    "started_at": "2026-09-05T06:48:48.467+00:00",
+    "settings": {
+      "AGENT_HOME": "/work/runtime/oom/after",
+      "AGENT_PORT": "15034",
+      "AGENT_UPLOAD_DIR": "/work/runtime/oom/after/upload_files",
+      "AGENT_KEY_PATH": "/work/runtime/oom/after/api_keys",
+      "AGENT_LOG_DIR": "/work/runtime/oom/after/logs",
+      "MEMORY_LIMIT": "200",
+      "CPU_MAX_OCCUPY": "40",
+      "MULTI_THREAD_ENABLE": "false"
+    },
+    "binary": "/work/agent-app-leak/agent-leak-app-x86",
+    "command": [
+      "/work/agent-app-leak/agent-leak-app-x86"
+    ],
+    "observation_limit_seconds": 90,
+    "launcher_pid": 15,
+    "ended_at": "2026-09-05T06:49:12.153+00:00",
+    "elapsed_seconds": 23.687,
+    "returncode": -9,
+    "observer_stopped": false,
+    "observed_pids": [
+      15,
+      34
+    ],
+    "sample_count": 22,
+    "first_rss_kb": 18480,
+    "last_rss_kb": 197708,
+    "min_rss_kb": 18480,
+    "max_rss_kb": 197708,
+    "max_cpu": 4.0,
+    "mean_cpu": 1.182,
+    "first_sample": "2026-09-05T15:48:49+09:00",
+    "last_sample": "2026-09-05T15:49:11+09:00"
+  },
+  {
+    "case": "cpu/before-02",
+    "pid": 1089,
+    "started_at": "2026-09-05T06:49:12.258+00:00",
+    "settings": {
+      "AGENT_HOME": "/work/runtime/cpu/before-02",
+      "AGENT_PORT": "15034",
+      "AGENT_UPLOAD_DIR": "/work/runtime/cpu/before-02/upload_files",
+      "AGENT_KEY_PATH": "/work/runtime/cpu/before-02/api_keys",
+      "AGENT_LOG_DIR": "/work/runtime/cpu/before-02/logs",
+      "MEMORY_LIMIT": "512",
+      "CPU_MAX_OCCUPY": "100",
+      "MULTI_THREAD_ENABLE": "false"
+    },
+    "binary": "/work/agent-app-leak/agent-leak-app-x86",
+    "command": [
+      "/work/agent-app-leak/agent-leak-app-x86"
+    ],
+    "observation_limit_seconds": 100,
+    "launcher_pid": 1069,
+    "ended_at": "2026-09-05T06:49:42.762+00:00",
+    "elapsed_seconds": 30.504,
+    "returncode": -15,
+    "observer_stopped": false,
+    "observed_pids": [
+      1069,
+      1089
+    ],
+    "sample_count": 29,
+    "first_rss_kb": 18372,
+    "last_rss_kb": 16476,
+    "min_rss_kb": 15400,
+    "max_rss_kb": 18436,
+    "max_cpu": 5.0,
+    "mean_cpu": 0.828,
+    "first_sample": "2026-09-05T15:49:13+09:00",
+    "last_sample": "2026-09-05T15:49:42+09:00",
+    "burst_peak": {
+      "timestamp": "2026-09-05T06:49:42.475+00:00",
+      "pid": "1089",
+      "cpu_percent": "78.6",
+      "interval_seconds": "0.050898",
+      "state": "R",
+      "rss_kb": "16488"
+    }
+  },
+  {
+    "case": "cpu/after",
+    "pid": 2443,
+    "started_at": "2026-09-05T06:49:42.848+00:00",
+    "settings": {
+      "AGENT_HOME": "/work/runtime/cpu/after",
+      "AGENT_PORT": "15034",
+      "AGENT_UPLOAD_DIR": "/work/runtime/cpu/after/upload_files",
+      "AGENT_KEY_PATH": "/work/runtime/cpu/after/api_keys",
+      "AGENT_LOG_DIR": "/work/runtime/cpu/after/logs",
+      "MEMORY_LIMIT": "512",
+      "CPU_MAX_OCCUPY": "40",
+      "MULTI_THREAD_ENABLE": "false"
+    },
+    "binary": "/work/agent-app-leak/agent-leak-app-x86",
+    "command": [
+      "/work/agent-app-leak/agent-leak-app-x86"
+    ],
+    "observation_limit_seconds": 75,
+    "launcher_pid": 2423,
+    "observer_stop_at": "2026-09-05T06:50:57.931+00:00",
+    "ended_at": "2026-09-05T06:50:57.941+00:00",
+    "elapsed_seconds": 75.093,
+    "returncode": -15,
+    "observer_stopped": true,
+    "observed_pids": [
+      2423,
+      2443
+    ],
+    "sample_count": 73,
+    "first_rss_kb": 18540,
+    "last_rss_kb": 67944,
+    "min_rss_kb": 16752,
+    "max_rss_kb": 528672,
+    "max_cpu": 7.9,
+    "mean_cpu": 1.584,
+    "first_sample": "2026-09-05T15:49:44+09:00",
+    "last_sample": "2026-09-05T15:50:57+09:00",
+    "burst_peak": {
+      "timestamp": "2026-09-05T06:50:46.840+00:00",
+      "pid": "2443",
+      "cpu_percent": "99.2",
+      "interval_seconds": "0.050427",
+      "state": "S",
+      "rss_kb": "16568"
+    }
+  },
+  {
+    "case": "deadlock/before",
+    "pid": 5782,
+    "started_at": "2026-09-05T06:50:58.028+00:00",
+    "settings": {
+      "AGENT_HOME": "/work/runtime/deadlock/before",
+      "AGENT_PORT": "15034",
+      "AGENT_UPLOAD_DIR": "/work/runtime/deadlock/before/upload_files",
+      "AGENT_KEY_PATH": "/work/runtime/deadlock/before/api_keys",
+      "AGENT_LOG_DIR": "/work/runtime/deadlock/before/logs",
+      "MEMORY_LIMIT": "512",
+      "CPU_MAX_OCCUPY": "40",
+      "MULTI_THREAD_ENABLE": "true"
+    },
+    "binary": "/work/agent-app-leak/agent-leak-app-x86",
+    "command": [
+      "/work/agent-app-leak/agent-leak-app-x86"
+    ],
+    "observation_limit_seconds": 60,
+    "launcher_pid": 5763,
+    "observer_stop_at": "2026-09-05T06:51:58.081+00:00",
+    "ended_at": "2026-09-05T06:51:58.091+00:00",
+    "elapsed_seconds": 60.063,
+    "returncode": -15,
+    "observer_stopped": true,
+    "observed_pids": [
+      5763,
+      5782
+    ],
+    "sample_count": 58,
+    "first_rss_kb": 18468,
+    "last_rss_kb": 12300,
+    "min_rss_kb": 12300,
+    "max_rss_kb": 18556,
+    "max_cpu": 0.0,
+    "mean_cpu": 0.0,
+    "first_sample": "2026-09-05T15:50:59+09:00",
+    "last_sample": "2026-09-05T15:51:57+09:00"
+  },
+  {
+    "case": "deadlock/after",
+    "pid": 8441,
+    "started_at": "2026-09-05T06:51:58.179+00:00",
+    "settings": {
+      "AGENT_HOME": "/work/runtime/deadlock/after",
+      "AGENT_PORT": "15034",
+      "AGENT_UPLOAD_DIR": "/work/runtime/deadlock/after/upload_files",
+      "AGENT_KEY_PATH": "/work/runtime/deadlock/after/api_keys",
+      "AGENT_LOG_DIR": "/work/runtime/deadlock/after/logs",
+      "MEMORY_LIMIT": "512",
+      "CPU_MAX_OCCUPY": "40",
+      "MULTI_THREAD_ENABLE": "false"
+    },
+    "binary": "/work/agent-app-leak/agent-leak-app-x86",
+    "command": [
+      "/work/agent-app-leak/agent-leak-app-x86"
+    ],
+    "observation_limit_seconds": 60,
+    "launcher_pid": 8422,
+    "observer_stop_at": "2026-09-05T06:52:58.516+00:00",
+    "ended_at": "2026-09-05T06:52:58.535+00:00",
+    "elapsed_seconds": 60.356,
+    "returncode": -15,
+    "observer_stopped": true,
+    "observed_pids": [
+      8422,
+      8441
+    ],
+    "sample_count": 58,
+    "first_rss_kb": 18372,
+    "last_rss_kb": 503376,
+    "min_rss_kb": 18372,
+    "max_rss_kb": 503376,
+    "max_cpu": 7.9,
+    "mean_cpu": 1.872,
+    "first_sample": "2026-09-05T15:51:59+09:00",
+    "last_sample": "2026-09-05T15:52:57+09:00"
+  }
+]

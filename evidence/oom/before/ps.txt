@@ -1,0 +1,36 @@
+
+[2026-09-05T06:48:14.650+00:00] elapsed=0.002s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:48 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Rs    0.0  0.0  2020 00:00:00 -                                agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+     14      14  TS      -   0  19
+app.log bytes=1301
+
+[2026-09-05T06:48:19.668+00:00] elapsed=5.020s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  1 15:48 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       33      14  1 15:48 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,33 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    1.2  0.0  2024 00:00:00 do_wait                          agent-leak-app-
+     33      14      33    1 SN    1.8  0.2 44116 00:00:00 do_select                        agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+     14      14  TS      -   0  19
+     33      33  TS      -  10   9
+app.log bytes=1366
+
+[2026-09-05T06:48:24.681+00:00] elapsed=10.032s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:48 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       33      14  1 15:48 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,33 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    0.6  0.0  2024 00:00:00 do_wait                          agent-leak-app-
+     33      14      33    1 SN    1.7  0.5 95324 00:00:00 do_select                        agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+     14      14  TS      -   0  19
+     33      33  TS      -  10   9
+app.log bytes=1496

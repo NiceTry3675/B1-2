@@ -1,0 +1,54 @@
+
+[2026-09-05T06:48:48.477+00:00] elapsed=0.002s
+top - 15:48:48 up 5 min,  0 users,  load average: 0.13, 0.20, 0.09
+Threads:   1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 10.0 us,  6.7 sy,  0.0 ni, 83.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  16049.5 total,  15373.5 free,    391.7 used,    284.3 buff/cache
+MiB Swap:  17073.5 total,  17073.5 free,      0.0 used.  15368.8 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+     15 analyst   20   0    3000   2040   1812 S  60.0   0.0   0:00.09 agent-leak-app-
+
+[2026-09-05T06:48:53.496+00:00] elapsed=5.018s
+top - 15:48:53 up 5 min,  0 users,  load average: 0.12, 0.19, 0.09
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  1.1 us,  1.1 sy,  0.0 ni, 97.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  16049.5 total,  15329.7 free,    435.4 used,    284.3 buff/cache
+MiB Swap:  17073.5 total,  17073.5 free,      0.0 used.  15325.1 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+     15 analyst   20   0    3000   2040   1812 S   0.0   0.0   0:00.09 agent-leak-app-
+     34 analyst   30  10   48764  44084   9932 S   0.0   0.3   0:00.09 agent-leak-app-
+
+[2026-09-05T06:48:58.514+00:00] elapsed=10.036s
+top - 15:48:58 up 5 min,  0 users,  load average: 0.19, 0.21, 0.09
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  16049.5 total,  15299.2 free,    465.7 used,    284.5 buff/cache
+MiB Swap:  17073.5 total,  17073.5 free,      0.0 used.  15294.7 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+     15 analyst   20   0    3000   2040   1812 S   0.0   0.0   0:00.09 agent-leak-app-
+     34 analyst   30  10   99972  95292   9932 S   0.0   0.6   0:00.17 agent-leak-app-
+
+[2026-09-05T06:49:03.535+00:00] elapsed=15.057s
+top - 15:49:03 up 5 min,  0 users,  load average: 0.17, 0.20, 0.09
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  16049.5 total,  15237.8 free,    527.1 used,    284.6 buff/cache
+MiB Swap:  17073.5 total,  17073.5 free,      0.0 used.  15233.2 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+     15 analyst   20   0    3000   2040   1812 S   0.0   0.0   0:00.09 agent-leak-app-
+     34 analyst   30  10  151180 146500   9932 S   0.0   0.9   0:00.24 agent-leak-app-
+
+[2026-09-05T06:49:08.559+00:00] elapsed=20.081s
+top - 15:49:08 up 5 min,  0 users,  load average: 0.16, 0.20, 0.09
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  16049.5 total,  15220.9 free,    544.0 used,    284.6 buff/cache
+MiB Swap:  17073.5 total,  17073.5 free,      0.0 used.  15216.3 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+     15 analyst   20   0    3000   2040   1812 S   0.0   0.0   0:00.09 agent-leak-app-
+     34 analyst   30  10  176784 172104   9932 S   0.0   1.0   0:00.28 agent-leak-app-

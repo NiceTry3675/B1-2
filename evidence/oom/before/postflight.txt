@@ -1,0 +1,13 @@
+State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+UID          PID    PPID  C STIME TTY          TIME CMD
+analyst        1       0  0 15:48 ?        00:00:00 /sbin/docker-init -- python3 scripts/run_case.py oom/before --memory 100 --cpu 40 --multi false --seconds 90
+analyst        7       1  0 15:48 ?        00:00:00 python3 scripts/run_case.py oom/before --memory 100 --cpu 40 --multi false --seconds 90
+analyst      520       7  0 15:48 ?        00:00:00 ps -ef
+
+$ cat /sys/fs/cgroup/memory.events
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0

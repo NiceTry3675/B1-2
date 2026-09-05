@@ -1,0 +1,19 @@
+{
+  "started_at": "2026-09-05T06:49:12.258+00:00",
+  "settings": {
+    "AGENT_HOME": "/work/runtime/cpu/before-02",
+    "AGENT_PORT": "15034",
+    "AGENT_UPLOAD_DIR": "/work/runtime/cpu/before-02/upload_files",
+    "AGENT_KEY_PATH": "/work/runtime/cpu/before-02/api_keys",
+    "AGENT_LOG_DIR": "/work/runtime/cpu/before-02/logs",
+    "MEMORY_LIMIT": "512",
+    "CPU_MAX_OCCUPY": "100",
+    "MULTI_THREAD_ENABLE": "false"
+  },
+  "binary": "/work/agent-app-leak/agent-leak-app-x86",
+  "command": [
+    "/work/agent-app-leak/agent-leak-app-x86"
+  ],
+  "observation_limit_seconds": 100,
+  "launcher_pid": 1069
+}

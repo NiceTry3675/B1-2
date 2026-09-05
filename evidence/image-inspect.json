@@ -1,0 +1,56 @@
+[
+    {
+        "Id": "sha256:cd966adab75979adb3e52554584519aca2f747da1be7d1c8dac3c6a540b6a014",
+        "RepoTags": [
+            "b1-2-lab:latest"
+        ],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-09-05T15:46:01.420416547+09:00",
+        "DockerVersion": "",
+        "Author": "",
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 133642827,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/39u7l1roiwgzc97t7azj6xwft/diff:/var/lib/docker/overlay2/67e8ba306acfbebd53aba4e96f4af46365d85f12f75cbab68d2c775ddfe04886/diff",
+                "MergedDir": "/var/lib/docker/overlay2/wxbjfczdn2gkinbgwa0ru9bjf/merged",
+                "UpperDir": "/var/lib/docker/overlay2/wxbjfczdn2gkinbgwa0ru9bjf/diff",
+                "WorkDir": "/var/lib/docker/overlay2/wxbjfczdn2gkinbgwa0ru9bjf/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:c0359c5b6ede84d4a083d06d35ee77f0b338dfb17423771854d007d89953fb3e",
+                "sha256:d94daabe4e7247cf1f1e59b0e0bfaee31bd6b2b1c28bd462bae9bb0c1be45d50",
+                "sha256:c900686762321915545f83603ec13f6697379608400a82bcfec35a73afac4df7"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-09-05T15:46:02.033611856+09:00"
+        },
+        "Config": {
+            "ArgsEscaped": true,
+            "Cmd": [
+                "bash"
+            ],
+            "Entrypoint": null,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "DEBIAN_FRONTEND=noninteractive",
+                "TZ=Asia/Seoul"
+            ],
+            "Labels": {
+                "org.opencontainers.image.version": "22.04"
+            },
+            "OnBuild": null,
+            "User": "analyst",
+            "Volumes": null,
+            "WorkingDir": "/work"
+        }
+    }
+]

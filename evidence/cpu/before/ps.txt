@@ -1,0 +1,78 @@
+
+[2026-09-05T06:46:40.424+00:00] elapsed=0.002s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Rs    0.0  0.0  2120 00:00:00 -                                agent-leak-app-
+app.log bytes=866
+
+[2026-09-05T06:46:45.438+00:00] elapsed=5.015s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  1 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       31      14  1 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,31 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    1.8  0.0  2124 00:00:00 do_wait                          agent-leak-app-
+     31      14      31    1 SN    1.2  0.1 18436 00:00:00 do_select                        agent-leak-app-
+app.log bytes=1441
+
+[2026-09-05T06:46:50.456+00:00] elapsed=10.034s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       31      14  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,31 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    0.9  0.0  2124 00:00:00 do_wait                          agent-leak-app-
+     31      14      31    1 SN    0.8  0.1 18436 00:00:00 do_select                        agent-leak-app-
+app.log bytes=1568
+
+[2026-09-05T06:46:55.474+00:00] elapsed=15.052s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       31      14  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,31 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    0.6  0.0  2124 00:00:00 do_wait                          agent-leak-app-
+     31      14      31    1 SN    0.7  0.1 18436 00:00:00 do_select                        agent-leak-app-
+app.log bytes=1696
+
+[2026-09-05T06:47:00.490+00:00] elapsed=20.067s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       31      14  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,31 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    0.4  0.0  2124 00:00:00 do_wait                          agent-leak-app-
+     31      14      31    1 SN    0.6  0.1 18436 00:00:00 do_select                        agent-leak-app-
+app.log bytes=1760
+
+[2026-09-05T06:47:05.509+00:00] elapsed=25.085s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       31      14  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,31 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    0.3  0.0  2124 00:00:00 do_wait                          agent-leak-app-
+     31      14      31    1 SN    0.7  0.1 18436 00:00:00 do_select                        agent-leak-app-
+app.log bytes=1888
+
+[2026-09-05T06:47:10.526+00:00] elapsed=30.104s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       31      14  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,31 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    0.3  0.0  2124 00:00:00 do_wait                          agent-leak-app-
+     31      14      31    1 SN    0.7  0.1 18436 00:00:00 do_select                        agent-leak-app-
+app.log bytes=2016
+
+[2026-09-05T06:47:15.540+00:00] elapsed=35.118s
+$ ps -ef | grep [a]gent-leak-app
+analyst       14       7  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst       31      14  0 15:46 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 14,31 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+     14       7      14    1 Ss    0.2  0.0  2124 00:00:00 do_wait                          agent-leak-app-
+     31      14      31    1 SN    0.8  0.0 15188 00:00:00 do_select                        agent-leak-app-
+app.log bytes=2080

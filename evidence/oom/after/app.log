@@ -1,0 +1,43 @@
+>>> Starting Agent Boot Sequence...
+[1/6] Checking User Account               [OK]
+   ... Running as service user 'analyst' (uid=1000)
+[2/6] Verifying Environment Variables     [OK]
+   ... All required Envs correct
+[3/6] Checking Required Files             [OK]
+   ... Verified 'secret.key' with correct key string.
+[4/6] Checking Port Availability          [OK]
+   ... Port 15034 is available.
+[5/6] Verifying Log Permission            [OK]
+   ... Log directory is writable: /work/runtime/oom/after/logs
+[6/6] Verifying Mission Environment       [OK]
+   ... MEMORY_LIMIT=200MB, CPU_MAX_OCCUPY=40%, MULTI_THREAD_ENABLE=False
+------------------------------------------------------------
+All Boot Checks Passed!
+Agent READY
+2026-09-05 15:48:48,628 [INFO] [SafetyGuard] Process priority lowered (nice=10).
+2026-09-05 15:48:48,628 [INFO] Agent listening at port 15034
+
+==================================================
+ [ Agent Initiate ] Resource Check 
+==================================================
+ [ MEMORY ] Limit: 200MB 		[ WARNING: Recommend Over 256MB ]
+ [ CPU    ] Limit: 40%  		[ OK ]
+ [ THREAD ] Concurrency: False 		[ OK ]
+--------------------------------------------------
+ >>> SYSTEM STATUS: STABLE. STARTING WORKLOAD MONITORING...
+==================================================
+
+2026-09-05 15:48:50,678 [INFO] [MemoryWorker] Current Heap: 25MB
+2026-09-05 15:48:53,732 [INFO] [MemoryWorker] Current Heap: 50MB
+2026-09-05 15:48:56,786 [INFO] [MemoryWorker] Current Heap: 75MB
+2026-09-05 15:48:59,833 [INFO] [MemoryWorker] Current Heap: 100MB
+2026-09-05 15:49:02,887 [INFO] [MemoryWorker] Current Heap: 125MB
+2026-09-05 15:49:05,940 [INFO] [MemoryWorker] Current Heap: 150MB
+2026-09-05 15:49:08,988 [INFO] [MemoryWorker] Current Heap: 175MB
+2026-09-05 15:49:12,041 [INFO] [MemoryWorker] Current Heap: 200MB
+2026-09-05 15:49:12,041 [CRITICAL] [MemoryGuard] Memory limit exceeded (200MB >= 200MB) / (Recommend Over 256MB)
+2026-09-05 15:49:12,041 [CRITICAL] [MemoryGuard] Self-terminating process 34 to prevent system instability.
+
+
+>>> [SYSTEM] SELF-TERMINATED (Memory Limit Exceeded) <<<
+

@@ -1,0 +1,5 @@
+State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+UID          PID    PPID  C STIME TTY          TIME CMD
+analyst        1       0  0 15:46 ?        00:00:00 /sbin/docker-init -- python3 scripts/run_case.py cpu/before --memory 512 --cpu 100 --multi false --seconds 100
+analyst        7       1  0 15:46 ?        00:00:00 python3 scripts/run_case.py cpu/before --memory 512 --cpu 100 --multi false --seconds 100
+analyst     1751       7  0 15:47 ?        00:00:00 ps -ef

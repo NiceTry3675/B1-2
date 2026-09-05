@@ -1,0 +1,193 @@
+
+[2026-09-05T06:50:58.030+00:00] elapsed=0.001s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Rs    0.0  0.0  2116 00:00:00 -                                agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+app.log bytes=1282
+
+[2026-09-05T06:51:03.045+00:00] elapsed=5.016s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  1 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  1 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    1.2  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    1 SN    0.8  0.1 18468 00:00:00 do_select                        agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+app.log bytes=1468
+
+[2026-09-05T06:51:08.059+00:00] elapsed=10.030s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.6  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.5  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:13.081+00:00] elapsed=15.053s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.4  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.3  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:18.112+00:00] elapsed=20.083s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.3  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.2  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:23.130+00:00] elapsed=25.101s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.2  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.2  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:28.146+00:00] elapsed=30.118s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.2  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.1  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:33.165+00:00] elapsed=35.136s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.1  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.1  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:38.187+00:00] elapsed=40.157s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.1  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.1  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:43.201+00:00] elapsed=45.172s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.1  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.1  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.1 18556 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:48.259+00:00] elapsed=50.230s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.1  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.1  0.0 12300 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.0 12300 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.0 12300 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657
+
+[2026-09-05T06:51:53.266+00:00] elapsed=55.238s
+$ ps -ef | grep [a]gent-leak-app
+analyst     5763    5756  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-leak-app-x86
+$ ps -L -p 5763,5782 -o pid,ppid,lwp,nlwp,stat,pcpu,pmem,rss,time,wchan:32,comm
+    PID    PPID     LWP NLWP STAT %CPU %MEM   RSS     TIME WCHAN                            COMMAND
+   5763    5756    5763    1 Ss    0.1  0.0  2120 00:00:00 do_wait                          agent-leak-app-
+   5782    5763    5782    3 SNl   0.0  0.0 12300 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6079    3 SNl   0.0  0.0 12300 00:00:00 futex_wait                       agent-leak-app-
+   5782    5763    6080    3 SNl   0.0  0.0 12300 00:00:00 futex_wait                       agent-leak-app-
+    PID     LWP CLS RTPRIO  NI PRI
+   5763    5763  TS      -   0  19
+   5782    5782  TS      -  10   9
+   5782    6079  TS      -  10   9
+   5782    6080  TS      -  10   9
+app.log bytes=2657

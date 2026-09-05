@@ -1,0 +1,39 @@
+$ id
+uid=1000(analyst) gid=1000(analyst) groups=1000(analyst)
+$ uname -a
+Linux 1964e51ecd42 6.17.8-orbstack-00308-g8f9c941121b1 #1 SMP PREEMPT Thu Nov 20 09:34:02 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:           16049         399       15402          12         247       15361
+Swap:          17073           0       17073
+$ ss -ltnp
+State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+$ sha256sum /work/agent-app-leak/agent-leak-app-x86
+7e0a19cfa80ece6b547a5008273661f0d4d71e526e96b51e0d0f341dd1bb3e40  /work/agent-app-leak/agent-leak-app-x86
+
+$ cat /sys/fs/cgroup/cpu.max
+200000 100000
+
+$ cat /sys/fs/cgroup/memory.max
+1073741824
+
+$ cat /sys/fs/cgroup/memory.events
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0

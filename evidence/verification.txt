@@ -1,0 +1,16 @@
+B1-2 verification / 2026-09-05 KST
+PASS ShellCheck: monitor.sh, scripts/run_experiments.sh (Ubuntu shellcheck 0.8.0)
+PASS Python syntax: run_case.py, sample_cpu.py, summarize.py
+PASS oom/before: boot, child PID, monitor, no residual app, oom_kill=0
+PASS oom/after: boot, child PID, monitor, no residual app, oom_kill=0
+PASS cpu/before-02: boot, child PID, monitor, no residual app, oom_kill=0
+PASS cpu/after: boot, child PID, monitor, no residual app, oom_kill=0
+PASS deadlock/before: boot, child PID, monitor, no residual app, oom_kill=0
+PASS deadlock/after: boot, child PID, monitor, no residual app, oom_kill=0
+PASS causal comparisons: only one functional variable differs per pair
+PASS 25 quoted evidence lines matched actual source text
+PASS all Markdown report links resolve locally; no unfilled report templates
+PASS OOM SIGKILL, CPU Watchdog SIGTERM, observer cleanup, deadlock and recovery assertions
+PASS PDF: 12 pages; Korean text, charts, tables and page flow visually reviewed as rendered PNGs
+PASS PDF: required evidence markers and all six run durations present in extracted text
+PASS PDF attachments: ZIP CRC and every SHA256SUMS entry verified; reproduction scripts included
