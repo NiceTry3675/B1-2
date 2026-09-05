@@ -51,6 +51,66 @@ analyst     5782    5763  0 15:50 ?        00:00:00 /work/agent-app-leak/agent-l
 
 원본: [실행 로그](../evidence/deadlock/before/app.log), [관제](../evidence/deadlock/before/monitor-5782.log), [PID·스레드·로그 크기](../evidence/deadlock/before/ps.txt), [top -H](../evidence/deadlock/before/top.txt), [Before 결과](../evidence/deadlock/before/result.json).
 
+### 추가 직접 증거: GDB 스택 + strace의 워커/LWP 연결 (FAIL #15)
+
+2026-09-05 **16:28:13~16:29:13 KST**에 동일 기능 설정(512/40/true)으로 별도 진단 실행을 수행했다. 원본 Before/After 수치는 변경하지 않았다. 추가 실행의 실제 작업 PID는 **35**, 부모는 16이며 앱은 기존과 같이 `analyst`(UID 1000)로 실행했다. 진단 전용 컨테이너에 GDB 12.1, strace 5.16을 추가하고 추적 도구만 root로 실행했다.
+
+| 자료 | KST 시간 / 대상 | 원본 |
+| --- | --- | --- |
+| 시스템 호출 추적 | 16:28:14.039~26.101 / PID 35와 자식 LWP | [strace-futex-write.txt](../evidence/deadlock/diagnostic-01/strace-futex-write.txt) |
+| 전체 스레드 스택 1 | 16:28:26.101 / LWP 35, 331, 332 | [gdb-thread-bt-01.txt](../evidence/deadlock/diagnostic-01/gdb-thread-bt-01.txt) |
+| 전체 스레드 스택 2 | 16:28:41.242 / 같은 LWP | [gdb-thread-bt-02.txt](../evidence/deadlock/diagnostic-01/gdb-thread-bt-02.txt) |
+| 디버거 분리 후 대기 | 16:28:26.220 및 41.360 / 같은 LWP | [proc 1](../evidence/deadlock/diagnostic-01/proc-after-gdb-01.txt), [proc 2](../evidence/deadlock/diagnostic-01/proc-after-gdb-02.txt) |
+| 앱·환경·종료 기록 | 60초 관측, 관측자 SIGTERM | [앱 로그](../evidence/deadlock/diagnostic-01/app.log), [환경](../evidence/deadlock/diagnostic-01/preflight.txt), [결과](../evidence/deadlock/diagnostic-01/result.json), [수집 시각·명령](../evidence/deadlock/diagnostic-01/diagnostic-events.json) |
+
+**이름과 LWP의 직접 연결:** strace는 각 `write()`를 호출한 Linux TID를 행 맨 앞에 표시한다. 16:28:23.003206의 TID 331이 Worker-Thread-1의 `WAITING for [Socket_Pool_B]`를 stdout에 썼고, 16:28:23.003704의 TID 332가 Worker-Thread-2의 `WAITING for [Shared_Memory_A]`를 썼다. 같은 TID의 앞선 LOCK ACQUIRED 출력까지 연결하면 다음 관계가 성립한다. OS comm은 둘 다 잘린 실행 파일명이라 comm만으로 이름을 추정하지 않았다.
+
+| 앱 이름 / LWP | 로그의 보유 자원 | 다음 요청 자원 | 마지막 지속 futex 대기 주소 |
+| --- | --- | --- | --- |
+| Worker-Thread-1 / 331 | Shared_Memory_A | Socket_Pool_B | 0x1214e2b0 |
+| Worker-Thread-2 / 332 | Socket_Pool_B | Shared_Memory_A | 0x12154e90 |
+
+strace의 마지막 대기 호출 원문:
+
+```text
+331   16:28:23.003371 futex(0x1214e2b0, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:23.003865 futex(0x12154e90, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <detached ...>
+```
+
+`NULL`은 이 futex 대기 호출에 제한 시간이 전달되지 않았음을 나타낸다. `<detached ...>`는 수집기가 strace에 SIGINT를 보내 분리한 표기이며, 앱의 락 획득 성공 또는 종료가 아니다. 추적 중 나타나는 다른 futex 주소에는 로깅·런타임 동기화도 포함될 수 있어 모든 futex를 업무 자원 락으로 분류하지 않았다.
+
+**GDB 콜스택 원문 발췌:** 1차 캡처에서 각 워커의 #0~#2 프레임은 아래와 같다. 두 번째 캡처에도 같은 PC와 `PyThread_acquire_lock_timed` 프레임이 유지되었다. 전체 12개 프레임/스레드는 위 원본에 보존했다.
+
+```text
+Thread 3 (Thread 0x7fe791277640 (LWP 332) "agent-leak-app-"):
+#0  0x00007fe792c9b0d7 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007fe792ca6c38 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007fe79284ecec in PyThread_acquire_lock_timed () from /tmp/_MEILP5dBf/libpython3.10.so.1.0
+Thread 2 (Thread 0x7fe791a78640 (LWP 331) "agent-leak-app-"):
+#0  0x00007fe792c9b0d7 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#1  0x00007fe792ca6c38 in ?? () from /lib/x86_64-linux-gnu/libc.so.6
+#2  0x00007fe79284ecec in PyThread_acquire_lock_timed () from /tmp/_MEILP5dBf/libpython3.10.so.1.0
+```
+
+두 GDB 캡처 사이 시작 시각 차이는 **15.141초**다. GDB를 분리한 직후 `/proc/35/task/331/syscall`은 두 번 모두 `202 0x1214e2b0 0x189 ...`, LWP 332는 `202 0x12154e90 0x189 ...`를 나타냈다. 이 x86_64 환경의 syscall 202를 strace가 futex로 해석한 결과와 일치한다. 두 LWP의 wchan은 `__futex_wait`, 앱 로그 크기는 모두 **2,664바이트**였다. 즉 디버거가 멈춘 순간만의 상태가 아니라, 디버거 분리 후에도 같은 자원 대기가 지속되었다.
+
+**수집 명령과 재현:** 기존 이미지를 빌드하고 진단 이미지를 추가한다. 마지막 인자는 새 증거 폴더명으로 바꿔 재실험할 수 있다.
+
+```bash
+docker build -t b1-2-lab .
+docker build -f Dockerfile.diagnostics -t b1-2-diagnostics .
+docker run --rm --init --memory=1g --cpus=2 --network=none \
+  --cap-add=SYS_PTRACE --security-opt=seccomp=unconfined --user root \
+  -v "$PWD:/work" b1-2-diagnostics \
+  python3 scripts/capture_deadlock.py deadlock/diagnostic-rerun-01
+```
+
+수집기는 `runuser -u analyst`로 기존 실험 실행기를 시작한 뒤, 작업 자식에 `strace -f -tt -T -s 512 -e trace=futex,write -p PID`를 붙인다. BLOCKED 두 건 확인 후 strace를 먼저 분리하고, `gdb -q -nx -batch -ex 'info threads' -ex 'thread apply all bt 12' -ex detach -p PID`로 두 번 스택을 수집한다. 실제 옵션 전체와 UTC 시각은 diagnostic-events.json에 남겼다. 앱 실행 파일의 해시는 최초 실험과 같다.
+
+**영향과 확인 범위:** GDB는 attach 시 잠깐 앱을 정지시키며 strace도 실행 타이밍에 영향을 준다. 따라서 추가 실행을 기존 생존 시간 통계에 섞지 않았다. 메모리 쓰기, 함수 호출 주입, 락 강제 해제, 디스어셈블·디컴파일은 수행하지 않았다. 바이너리에 디버그 정보가 없어 일부 네이티브 프레임은 `??`이며 Python 소스 줄 번호는 복원하지 않았다. 그럼에도 **로그를 쓴 실제 워커 TID → 무기한 futex 대기 → Python 락 획득 콜스택 → 시간 경과 후 같은 대기 유지**를 직접 증거로 연결했다. A/B의 의미와 소유 관계는 앱 로그에 근거하며 락 객체 내부의 소유자 필드를 읽어낸 것은 아니다.
+
+명령 의미 참고: [GDB 전체 스레드 backtrace 공식 문서](https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Backtrace.html), [strace 공식 사용 안내](https://strace.io/).
+
 ## 3. Root Cause Analysis (원인 분석)
 
 로그가 나타내는 대기 관계는 다음과 같다. 화살표는 해당 자원 또는 작업의 완료를 기다린다는 뜻이다.
@@ -70,9 +130,9 @@ Worker-1 -> B -> Worker-2 -> A -> Worker-1
 | 비선점 | 상대 소유 자원이 반환되지 않고 대기 지속; 강제 회수 로그 없음 |
 | 순환 대기 | Worker-1 → B → Worker-2 → A → Worker-1 |
 
-정상적인 휴면 상태도 CPU가 0이고 `futex_wait`일 수 있다. 이번에는 서로의 자원을 기다리는 명시적 로그, 세 LWP의 대기, 장시간 작업 로그 정지가 함께 있으므로 순환 대기에 따른 교착상태로 판단한다. 메인 스레드는 `Waiting for worker threads to complete transactions...` 후 기다리므로 워커 완료 대기와 부합한다. 다만 OS LWP 번호와 앱의 Worker-1/2 이름을 직접 매핑한 것은 아니다.
+정상적인 휴면 상태도 CPU가 0이고 `futex_wait`일 수 있다. 이번에는 서로의 자원을 기다리는 명시적 로그, 세 LWP의 대기, 장시간 작업 로그 정지가 함께 있으므로 순환 대기에 따른 교착상태로 판단한다. 메인 스레드는 `Waiting for worker threads to complete transactions...` 후 기다리므로 워커 완료 대기와 부합한다. 최초 Before 실행은 이름/LWP 매핑이 없었지만, 추가 진단 실행에서는 strace의 write 호출로 Worker-1/2와 LWP 331/332를 직접 연결했다.
 
-OS는 락을 기다리는 스레드를 재우므로 CPU를 계속 소비하지 않아도 프로세스가 멈출 수 있다. 다른 스레드가 락을 해제할 때까지 acquire가 대기하는 일반 원리는 [Python threading 공식 문서](https://docs.python.org/3/library/threading.html#lock-objects)를 참고했다. 바이너리 내부 락 객체나 콜스택을 조사하지 않고 로그와 시스템 도구로 추론했다.
+OS는 락을 기다리는 스레드를 재우므로 CPU를 계속 소비하지 않아도 프로세스가 멈출 수 있다. 다른 스레드가 락을 해제할 때까지 acquire가 대기하는 일반 원리는 [Python threading 공식 문서](https://docs.python.org/3/library/threading.html#lock-objects)를 참고했다. 최초 분석은 로그와 ps에 근거했고, 추가 진단에서 GDB 콜스택·strace·분리 후 syscall 상태를 확보해 실제 락 획득 대기까지 확인했다. 내부 락 소유자 필드나 소스 코드는 조사하지 않았다.
 
 ## 4. Workaround & Verification (조치 및 검증)
 

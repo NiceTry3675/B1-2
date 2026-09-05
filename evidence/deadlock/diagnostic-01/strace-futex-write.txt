@@ -1,0 +1,138 @@
+35    16:28:15.952138 write(3, "2026-09-05 16:28:15,951 [WARNING] [AgentWorker] Initializing concurrent transaction processors...\n", 98) = 98 <0.000077>
+35    16:28:15.952763 write(1, "2026-09-05 16:28:15,951 [WARNING] [AgentWorker] Initializing concurrent transaction processors...\n", 98) = 98 <0.000038>
+35    16:28:15.953366 write(3, "2026-09-05 16:28:15,952 [WARNING] [System] CAUTION: Strict resource locking is enabled.\n", 88) = 88 <0.000074>
+35    16:28:15.953697 write(1, "2026-09-05 16:28:15,952 [WARNING] [System] CAUTION: Strict resource locking is enabled.\n", 88) = 88 <0.000027>
+35    16:28:20.979986 futex(0x12124860, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.980482 futex(0x12124860, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000087>
+35    16:28:20.980727 <... futex resumed>) = 0 <0.000591>
+35    16:28:20.980888 futex(0x7fe792bc1a68, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=958379651}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.981153 futex(0x7fe792bc1a68, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000074>
+35    16:28:20.981369 <... futex resumed>) = 0 <0.000398>
+35    16:28:20.981583 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000012>
+331   16:28:20.981808 futex(0x7fe792bc1a6c, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=959315499}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+35    16:28:20.981942 futex(0x7fe792bc1a6c, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000023>
+331   16:28:20.982043 <... futex resumed>) = 0 <0.000191>
+35    16:28:20.982101 futex(0x12124860, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.982150 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000022>
+332   16:28:20.982378 futex(0x7fe792bc1a68, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=959880562}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.982437 futex(0x7fe792bc1a68, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
+332   16:28:20.982494 <... futex resumed>) = -1 EAGAIN (Resource temporarily unavailable) <0.000061>
+331   16:28:20.982562 <... futex resumed>) = 0 <0.000090>
+332   16:28:20.982616 futex(0x7fe792bc1a70, FUTEX_WAIT_PRIVATE, 2, NULL) = -1 EAGAIN (Resource temporarily unavailable) <0.000016>
+331   16:28:20.982722 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000013>
+332   16:28:20.982807 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
+331   16:28:20.982860 write(3, "2026-09-05 16:28:20,980 [INFO] [Worker-Thread-1] Process Started. Attempting to lock [Shared_Memory_A]...\n", 106 <unfinished ...>
+332   16:28:20.982904 <... futex resumed>) = 0 <0.000063>
+331   16:28:20.982994 <... write resumed>) = 106 <0.000094>
+331   16:28:20.983084 futex(0x7fe792bc1a6c, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=960555560}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:20.983157 futex(0x12124860, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000022>
+35    16:28:20.983275 <... futex resumed>) = 0 <0.001137>
+35    16:28:20.983350 futex(0x7fe792bc1a6c, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=960855531}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:20.983449 futex(0x7fe792bc1a6c, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000057>
+331   16:28:20.983599 <... futex resumed>) = 0 <0.000477>
+331   16:28:20.983646 futex(0x7fe792bc1a70, FUTEX_WAIT_PRIVATE, 2, NULL <unfinished ...>
+332   16:28:20.983694 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000012>
+331   16:28:20.983789 <... futex resumed>) = 0 <0.000109>
+331   16:28:20.983824 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000009>
+332   16:28:20.983927 futex(0x7fe792bc1a70, FUTEX_WAIT_PRIVATE, 2, NULL <unfinished ...>
+331   16:28:20.983961 futex(0x7fe792bc1a6c, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000009>
+35    16:28:20.984029 <... futex resumed>) = 0 <0.000636>
+331   16:28:20.984064 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
+35    16:28:20.984100 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
+332   16:28:20.984163 <... futex resumed>) = 0 <0.000207>
+331   16:28:20.984209 <... futex resumed>) = 1 <0.000118>
+35    16:28:20.984283 <... futex resumed>) = 0 <0.000157>
+332   16:28:20.984316 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
+331   16:28:20.984341 write(1, "2026-09-05 16:28:20,980 [INFO] [Worker-Thread-1] Process Started. Attempting to lock [Shared_Memory_A]...\n", 106 <unfinished ...>
+332   16:28:20.984828 <... futex resumed>) = 0 <0.000488>
+331   16:28:20.984864 <... write resumed>) = 106 <0.000496>
+332   16:28:20.984920 futex(0x7fe792bc1a68, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=961766824}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.984956 futex(0x7fe792bc1a68, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=962413534}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+35    16:28:20.985028 futex(0x7fe792bc1a68, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
+331   16:28:20.985061 <... futex resumed>) = -1 EAGAIN (Resource temporarily unavailable) <0.000079>
+332   16:28:20.985105 <... futex resumed>) = 0 <0.000156>
+35    16:28:20.985132 <... futex resumed>) = 1 <0.000075>
+331   16:28:20.985159 futex(0x7fe792bc1a70, FUTEX_WAIT_PRIVATE, 2, NULL <unfinished ...>
+332   16:28:20.985199 futex(0x7fe792bc1a68, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=961766824}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+35    16:28:20.985228 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
+331   16:28:20.985255 <... futex resumed>) = -1 EAGAIN (Resource temporarily unavailable) <0.000072>
+331   16:28:20.985290 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1 <unfinished ...>
+35    16:28:20.985317 <... futex resumed>) = 0 <0.000065>
+331   16:28:20.985348 <... futex resumed>) = 0 <0.000034>
+35    16:28:20.985380 futex(0x1211ea40, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.985468 futex(0x7fe792bc1a68, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000017>
+331   16:28:20.985566 futex(0x1211ea40, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:20.985593 <... futex resumed>) = 0 <0.000366>
+332   16:28:20.985667 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000009>
+332   16:28:20.985904 write(3, "2026-09-05 16:28:20,983 [INFO] [AgentWorker][Worker-Thread-2] Process Started. Attempting to lock [Socket_Pool_B]...\n", 117) = 117 <0.000035>
+332   16:28:20.985999 futex(0x1211ea40, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000010>
+35    16:28:20.986058 <... futex resumed>) = 0 <0.000654>
+35    16:28:20.986088 futex(0x7fe792bc1a6c, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=963596306}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:20.986143 futex(0x7fe792bc1a6c, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000009>
+35    16:28:20.986201 <... futex resumed>) = 0 <0.000088>
+35    16:28:20.986230 futex(0x7fe792bc1a70, FUTEX_WAIT_PRIVATE, 2, NULL <unfinished ...>
+332   16:28:20.986261 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000008>
+35    16:28:20.986317 <... futex resumed>) = 0 <0.000066>
+35    16:28:20.986347 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000007>
+332   16:28:20.986411 write(1, "2026-09-05 16:28:20,983 [INFO] [AgentWorker][Worker-Thread-2] Process Started. Attempting to lock [Socket_Pool_B]...\n", 117) = 117 <0.000046>
+35    16:28:20.986608 futex(0x7fe792bc1a68, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=964113974}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:20.986656 futex(0x7fe792bc1a68, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000010>
+35    16:28:20.986709 <... futex resumed>) = 0 <0.000074>
+35    16:28:20.986738 futex(0x7fe792bc1a70, FUTEX_WAIT_PRIVATE, 2, NULL <unfinished ...>
+332   16:28:20.986768 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000008>
+35    16:28:20.986824 <... futex resumed>) = 0 <0.000065>
+35    16:28:20.986854 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000007>
+332   16:28:20.986920 futex(0x1211ea40, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+35    16:28:20.987017 write(3, "2026-09-05 16:28:20,984 [INFO] [AgentWorker] Waiting for worker threads to complete transactions...\n", 100) = 100 <0.000034>
+35    16:28:20.987136 futex(0x1211ea40, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000015>
+35    16:28:20.987221 write(1, "2026-09-05 16:28:20,984 [INFO] [AgentWorker] Waiting for worker threads to complete transactions...\n", 100 <unfinished ...>
+331   16:28:20.987249 <... futex resumed>) = 0 <0.001658>
+35    16:28:20.987324 <... write resumed>) = 100 <0.000077>
+35    16:28:20.987380 futex(0x7fe78c000b70, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.987582 write(3, "2026-09-05 16:28:20,985 [INFO] [AgentWorker][Worker-Thread-1] LOCK ACQUIRED: [Shared_Memory_A]. (Holding...)\n", 109) = 109 <0.000037>
+331   16:28:20.987689 futex(0x1211ea40, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000016>
+332   16:28:20.987775 <... futex resumed>) = 0 <0.000832>
+331   16:28:20.987804 write(1, "2026-09-05 16:28:20,985 [INFO] [AgentWorker][Worker-Thread-1] LOCK ACQUIRED: [Shared_Memory_A]. (Holding...)\n", 109) = 109 <0.000046>
+332   16:28:20.987982 futex(0x7fe792bc1a6c, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=965486818}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.988074 futex(0x7fe792bc1a6c, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000015>
+331   16:28:20.988142 futex(0x1211ea40, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:20.988220 <... futex resumed>) = 0 <0.000209>
+332   16:28:20.988302 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000009>
+332   16:28:20.988462 write(3, "2026-09-05 16:28:20,986 [INFO] [AgentWorker][Worker-Thread-2] LOCK ACQUIRED: [Socket_Pool_B]. (Holding...)\n", 107) = 107 <0.000036>
+332   16:28:20.988580 futex(0x1211ea40, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000016>
+331   16:28:20.988639 <... futex resumed>) = 0 <0.000459>
+332   16:28:20.988704 write(1, "2026-09-05 16:28:20,986 [INFO] [AgentWorker][Worker-Thread-2] LOCK ACQUIRED: [Socket_Pool_B]. (Holding...)\n", 107) = 107 <0.000111>
+331   16:28:20.988923 futex(0x7fe792bc1a68, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2691, tv_nsec=966426277}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:20.989030 futex(0x7fe792bc1a68, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000016>
+332   16:28:20.989100 futex(0x1211ea40, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:20.989125 <... futex resumed>) = 0 <0.000165>
+331   16:28:20.989180 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000008>
+331   16:28:20.989325 write(3, "2026-09-05 16:28:20,987 [INFO] [AgentWorker][Worker-Thread-1] Processing critical data in Memory A...\n", 102) = 102 <0.000037>
+331   16:28:20.989421 futex(0x1211ea40, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000008>
+332   16:28:20.989484 <... futex resumed>) = 0 <0.000362>
+331   16:28:20.989605 write(1, "2026-09-05 16:28:20,987 [INFO] [AgentWorker][Worker-Thread-1] Processing critical data in Memory A...\n", 102) = 102 <0.000037>
+332   16:28:20.989780 write(3, "2026-09-05 16:28:20,988 [INFO] [AgentWorker][Worker-Thread-2] Establishing network connections in Pool B...\n", 108) = 108 <0.000036>
+332   16:28:20.989903 write(1, "2026-09-05 16:28:20,988 [INFO] [AgentWorker][Worker-Thread-2] Establishing network connections in Pool B...\n", 108) = 108 <0.000014>
+331   16:28:23.000387 write(3, "2026-09-05 16:28:23,000 [INFO] [AgentWorker][Worker-Thread-1] Need resource [Socket_Pool_B] to finish job.\n", 107) = 107 <0.000066>
+331   16:28:23.000720 write(1, "2026-09-05 16:28:23,000 [INFO] [AgentWorker][Worker-Thread-1] Need resource [Socket_Pool_B] to finish job.\n", 107) = 107 <0.000137>
+331   16:28:23.001199 futex(0x1211ea40, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:23.001418 write(3, "2026-09-05 16:28:23,000 [INFO] [AgentWorker][Worker-Thread-2] Need resource [Shared_Memory_A] to write logs.\n", 109) = 109 <0.000071>
+332   16:28:23.001623 futex(0x1211ea40, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000017>
+331   16:28:23.001791 <... futex resumed>) = 0 <0.000540>
+332   16:28:23.001895 write(1, "2026-09-05 16:28:23,000 [INFO] [AgentWorker][Worker-Thread-2] Need resource [Shared_Memory_A] to write logs.\n", 109) = 109 <0.000116>
+331   16:28:23.002262 futex(0x7fe792bc1a6c, FUTEX_WAIT_BITSET_PRIVATE, 0, {tv_sec=2693, tv_nsec=979768695}, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:23.002331 futex(0x7fe792bc1a6c, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000012>
+331   16:28:23.002412 <... futex resumed>) = 0 <0.000111>
+331   16:28:23.002455 futex(0x7fe792bc1a70, FUTEX_WAIT_PRIVATE, 2, NULL <unfinished ...>
+332   16:28:23.002498 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000012>
+331   16:28:23.002579 <... futex resumed>) = 0 <0.000093>
+332   16:28:23.002625 futex(0x1211ea40, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+331   16:28:23.002700 futex(0x7fe792bc1a70, FUTEX_WAKE_PRIVATE, 1) = 0 <0.000010>
+331   16:28:23.002882 write(3, "2026-09-05 16:28:23,001 [INFO] [AgentWorker][Worker-Thread-1] WAITING for [Socket_Pool_B]... (Status: BLOCKED)\n", 111) = 111 <0.000043>
+331   16:28:23.003007 futex(0x1211ea40, FUTEX_WAKE_PRIVATE, 1) = 1 <0.000012>
+332   16:28:23.003088 <... futex resumed>) = 0 <0.000399>
+331   16:28:23.003206 write(1, "2026-09-05 16:28:23,001 [INFO] [AgentWorker][Worker-Thread-1] WAITING for [Socket_Pool_B]... (Status: BLOCKED)\n", 111) = 111 <0.000070>
+331   16:28:23.003371 futex(0x1214e2b0, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <unfinished ...>
+332   16:28:23.003518 write(3, "2026-09-05 16:28:23,002 [INFO] [AgentWorker][Worker-Thread-2] WAITING for [Shared_Memory_A]... (Status: BLOCKED)\n", 113) = 113 <0.000054>
+332   16:28:23.003704 write(1, "2026-09-05 16:28:23,002 [INFO] [AgentWorker][Worker-Thread-2] WAITING for [Shared_Memory_A]... (Status: BLOCKED)\n", 113) = 113 <0.000067>
+332   16:28:23.003865 futex(0x12154e90, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 0, NULL, FUTEX_BITSET_MATCH_ANY <detached ...>

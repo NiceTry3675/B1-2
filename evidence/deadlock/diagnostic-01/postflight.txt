@@ -1,0 +1,15 @@
+State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 16:28 ?        00:00:00 /sbin/docker-init -- python3 scripts/capture_deadlock.py
+root           7       1  0 16:28 ?        00:00:00 python3 scripts/capture_deadlock.py
+root           8       7  0 16:28 ?        00:00:00 runuser -u analyst -- python3 /work/scripts/run_case.py deadlock/diagnostic-01 --memory 512 --cpu 40 --multi true --seconds 60
+analyst        9       8  0 16:28 ?        00:00:00 python3 /work/scripts/run_case.py deadlock/diagnostic-01 --memory 512 --cpu 40 --multi true --seconds 60
+analyst     2705       9  0 16:29 ?        00:00:00 ps -ef
+
+$ cat /sys/fs/cgroup/memory.events
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0

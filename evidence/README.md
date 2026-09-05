@@ -32,3 +32,15 @@
 `container-hostconfig.json`과 `image-inspect.json`은 실제 실행 컨테이너 설정 및 이미지 정보를 보존한다. 비교 실험은 동시에 실행하지 않았다. OOM Before는 독립 컨테이너, 나머지 정식 5회는 같은 설정의 컨테이너에서 순차 실행했다. 재현 스크립트는 매번 새 컨테이너를 사용한다.
 
 원본 무결성은 `SHA256SUMS`로 확인할 수 있다. PDF에 첨부된 `evidence.zip`에도 원본을 포함했다. PDF 내부 링크의 상대 경로는 함께 제공된 프로젝트 폴더를 기준으로 한 참조이다.
+
+## FAIL #15 추가 진단 증거
+
+`deadlock/diagnostic-01/`은 2026-09-05 16:28~16:29 KST의 별도 60초 실행이다. 앱 PID 35(analyst), 부모 16, 워커 LWP 331/332이며 기능 설정은 512/40/true이다. GDB/strace가 타이밍에 영향을 줄 수 있어 기존 6회 비교 통계에 합산하지 않았다.
+
+- `strace-futex-write.txt`: LWP별 write 및 futex 원문; `strace-attach.txt`: attach/detach 출력
+- `gdb-thread-bt-01.txt`, `gdb-thread-bt-02.txt`: 약 15초 간격의 전체 스레드 12프레임 backtrace
+- `proc-during-strace.txt`, `proc-after-gdb-01.txt`, `proc-after-gdb-02.txt`: syscall, wchan, LWP, 앱 로그 크기
+- `diagnostic-events.json`, `diagnostic-tools.txt`: 시각·명령·도구 버전과 앱 해시
+- 기존 실행기 형식의 app/monitor/ps/top/settings/result/preflight/postflight 파일도 함께 보존
+
+`SHA256SUMS`는 추가 원본까지 포함한다. 검증 결과 문서 `verification.txt`와 `fail-remediation-verification.txt`는 갱신되는 감사 기록이므로 해시 목록에서 제외한다.

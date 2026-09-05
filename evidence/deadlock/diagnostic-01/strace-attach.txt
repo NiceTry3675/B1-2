@@ -1,0 +1,6 @@
+strace: Process 35 attached
+strace: Process 331 attached
+strace: Process 332 attached
+strace: Process 35 detached
+strace: Process 331 detached
+strace: Process 332 detached

@@ -159,14 +159,16 @@ def markdown(path,kind):
         if line.startswith('# '):
             result.append(P(line[2:],'h1')); result.extend(figures(kind)); i+=1; continue
         if line.startswith('## '):
-            if kind in ('oom','cpu','deadlock') and line.startswith('## 4.'):
+            if (kind in ('oom','cpu','deadlock') and line.startswith('## 4.')) or (kind=='deadlock' and line.startswith('## 3.')):
                 result.append(PageBreak())
             result.append(P(line[3:],'h2')); i+=1; continue
         if line.startswith('### '):
             result.append(P(line[4:],'h3')); i+=1; continue
+        if line.startswith('- '):
+            result.append(P('• ' + line[2:])); i+=1; continue
         para=[line]
         i+=1
-        while i<len(lines) and lines[i].strip() and not lines[i].startswith(('#','```','|')):
+        while i<len(lines) and lines[i].strip() and not lines[i].startswith(('#','```','|','- ')):
             para.append(lines[i]); i+=1
         paragraph=P(' '.join(para))
         next_line=i
@@ -187,15 +189,15 @@ def footer(canvas,doc):
     canvas.drawRightString(A4[0]-44,25,str(doc.page))
 
 
-story=[Spacer(1,40),P('B1-2 · 운영체제 장애 분석','h2'),P('시스템 장애 분석 및 이슈 리포트','h1'),P('OOM Crash · CPU Latency · Deadlock'),Spacer(1,15),P('실제 실행 로그를 근거로 재현, 원인 추론, 임시 조치와 결과를 검증했다. 제공 바이너리는 수정하거나 디컴파일하지 않았다.'),P('실험일: 2026-09-05 / 모든 본문 시각은 KST'),P('환경: Ubuntu 22.04.5 LTS, Linux 6.17.8 x86_64, 일반 사용자 analyst (UID 1000). OrbStack Docker 컨테이너에 메모리 1GiB·CPU 상한 2코어를 적용했다.'),Spacer(1,12)]
-cover=[['사례','주요 결과'],['OOM','100 → 200MB: 생존 11.412 → 23.687초. 512MB 추가 검증에서는 캐시 정리 확인.'],['CPU','100 → 40%: Watchdog 종료에서 75초 관측 중 생존 및 cooldown으로 전환.'],['Deadlock','true → false: 순환 자원 대기에서 작업 진행으로 전환.'],['보너스','등록된 A/B/C 순차 완료는 앱 수준의 FCFS 패턴과 부합.']]
+story=[Spacer(1,40),P('B1-2 · 운영체제 장애 분석','h2'),P('시스템 장애 분석 및 이슈 리포트','h1'),P('OOM Crash · CPU Latency · Deadlock'),Spacer(1,15),P('실제 실행 로그를 근거로 재현, 원인 추론, 임시 조치와 결과를 검증했다. 제공 바이너리는 수정하거나 디컴파일하지 않았다.'),P('실험일: 2026-09-05 / 모든 본문 시각은 KST / FAIL #15·#18 보완판'),P('환경: Ubuntu 22.04.5 LTS, Linux 6.17.8 x86_64, 일반 사용자 analyst (UID 1000). OrbStack Docker 컨테이너에 메모리 1GiB·CPU 상한 2코어를 적용했다.'),Spacer(1,12)]
+cover=[['사례','주요 결과'],['OOM','100 → 200MB: 생존 11.412 → 23.687초. 512MB 추가 검증에서는 캐시 정리 확인.'],['CPU','100 → 40%: Watchdog 종료에서 75초 관측 중 생존 및 cooldown으로 전환.'],['Deadlock','true → false: 순환 자원 대기에서 작업 진행으로 전환.'],['보너스','등록된 A/B/C 순차 완료는 앱 수준의 FCFS 패턴과 부합.'],['평가 보완','FAIL #15: 직접 스택·LWP 추적. FAIL #18: 동시 장애 우선순위·표준 대응 절차.']]
 t=Table([[P(c,'cell') for c in row] for row in cover],colWidths=[75,WIDTH-75])
 t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#DCE9ED')),('ROWBACKGROUNDS',(0,1),(-1,-1),[LIGHT,colors.white]),('VALIGN',(0,0),(-1,-1),'TOP'),('TOPPADDING',(0,0),(-1,-1),11),('BOTTOMPADDING',(0,0),(-1,-1),11)]))
 story += [t,Spacer(1,18),P('증거 읽기','h2'),P('본문은 필수 증거와 Before/After 비교를 포함한다. 전체 원본 로그는 이 PDF에 evidence.zip으로 첨부했다. PDF 뷰어의 첨부파일 패널에서 추출하거나 함께 제공된 프로젝트의 evidence 폴더를 열면 된다.'),P('앱의 Heap/Current Load, OS의 RSS/CPU, 컨테이너 자원 상한은 서로 다른 지표이다. 자체 보호 종료와 실험 종료용 SIGTERM도 구분했다. 관측 기간의 회피 효과를 장기 무장애 보장으로 해석하지 않는다.'),PageBreak()]
-for kind in ['oom','cpu','deadlock','scheduling']:
+for kind in ['oom','cpu','deadlock','incident-runbook','scheduling']:
     story += markdown(ROOT/f'reports/{kind}.md',kind)
     story.append(PageBreak())
-story += [P('증거 인덱스와 재현 안내','h1'),P('GitHub Issue 형식의 Markdown 원문은 reports/oom.md, reports/cpu.md, reports/deadlock.md이다. 보너스 원문은 reports/scheduling.md에 있다.'),P('정식 비교: oom/before, oom/after, cpu/before-02, cpu/after, deadlock/before, deadlock/after. 각 폴더의 app.log, monitor-PID.log, ps.txt, top.txt, settings.json, result.json, preflight.txt, postflight.txt를 보존했다.'),P('탐색 2회는 일반 리다이렉션으로 마지막 print가 유실될 수 있어, 정식 실험에서는 PTY로 표준 출력을 수집했다. CRLF만 LF로 정규화했고 앱 자체 로그도 별도 복사했다. 50ms 샘플은 CPU 정식 사례에 추가했다.'),P('생존 시간은 실행 시작부터 부모 회수와 관측기 정리까지의 monotonic 시간이며 작은 계측 오버헤드가 포함된다. JSON/CSV/ps 헤더는 UTC, 앱·monitor는 KST이다. RSS_KB는 KiB, 1코어 CPU=100% 기준이다.'),P('재현: Docker 환경에서 bash scripts/run_experiments.sh -rerun-01을 실행한다. 실행기는 기존 증거를 덮어쓰지 않는다. 폴더·키·권한·환경변수 준비와 비root 검증을 포함한다.'),P('바이너리 SHA-256','h2'),P('7e0a19cfa80ece6b547a5008273661f0d4d71e526e96b51e0d0f341dd1bb3e40','caption'),P('원본 무결성 및 제출 범위','h2'),P('첨부 evidence.zip 안의 SHA256SUMS로 원본 로그를 검증할 수 있다. 이 PDF는 제출용으로 완결된 보고서이며 GitHub에는 게시하지 않았다. 검증 기록과 실행·PDF 생성 스크립트는 프로젝트에 함께 제공한다.')]
+story += [P('증거 인덱스와 재현 안내','h1'),P('GitHub Issue 형식의 Markdown 원문은 reports/oom.md, reports/cpu.md, reports/deadlock.md이다. 보너스 원문은 reports/scheduling.md에 있다. FAIL #18의 대응 절차는 reports/incident-runbook.md, FAIL #15의 추가 직접 증거는 evidence/deadlock/diagnostic-01에 있다.'),P('정식 비교: oom/before, oom/after, cpu/before-02, cpu/after, deadlock/before, deadlock/after. 각 폴더의 app.log, monitor-PID.log, ps.txt, top.txt, settings.json, result.json, preflight.txt, postflight.txt를 보존했다.'),P('탐색 2회는 일반 리다이렉션으로 마지막 print가 유실될 수 있어, 정식 실험에서는 PTY로 표준 출력을 수집했다. CRLF만 LF로 정규화했고 앱 자체 로그도 별도 복사했다. 50ms 샘플은 CPU 정식 사례에 추가했다.'),P('생존 시간은 실행 시작부터 부모 회수와 관측기 정리까지의 monotonic 시간이며 작은 계측 오버헤드가 포함된다. JSON/CSV/ps 헤더는 UTC, 앱·monitor는 KST이다. RSS_KB는 KiB, 1코어 CPU=100% 기준이다.'),P('재현: Docker 환경에서 bash scripts/run_experiments.sh -rerun-01을 실행한다. 실행기는 기존 증거를 덮어쓰지 않는다. 폴더·키·권한·환경변수 준비와 비root 검증을 포함한다.'),P('바이너리 SHA-256','h2'),P('7e0a19cfa80ece6b547a5008273661f0d4d71e526e96b51e0d0f341dd1bb3e40','caption'),P('원본 무결성 및 제출 범위','h2'),P('첨부 evidence.zip 안의 SHA256SUMS로 원본 로그를 검증할 수 있다. 이 PDF는 평가 FAIL #15·#18을 보완한 제출용 보고서이며 공개 저장소 NiceTry3675/B1-2에 함께 제공한다. 검증 기록과 실행·PDF 생성 스크립트는 프로젝트에 함께 제공한다.')]
 buffer=io.BytesIO()
 doc=SimpleDocTemplate(buffer,pagesize=A4,leftMargin=44,rightMargin=44,topMargin=43,bottomMargin=52,title='B1-2 시스템 장애 분석 및 이슈 리포트',author='B1-2 실험 보고서')
 doc.build(story,onFirstPage=footer,onLaterPages=footer)
@@ -203,7 +205,7 @@ archive=io.BytesIO()
 with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED) as z:
     for path in sorted((ROOT/'evidence').rglob('*')):
         if path.is_file(): z.write(path,path.relative_to(ROOT).as_posix())
-    for name in ['scripts', 'reports', 'README.md', 'Dockerfile', 'monitor.sh', '.env.example', 'requirement.md']:
+    for name in ['scripts', 'reports', 'README.md', 'Dockerfile', 'Dockerfile.diagnostics', 'monitor.sh', '.env.example', 'requirement.md']:
         path=ROOT/name
         items=sorted(path.rglob('*')) if path.is_dir() else [path]
         for item in items:

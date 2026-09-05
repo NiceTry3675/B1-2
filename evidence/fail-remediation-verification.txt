@@ -1,0 +1,18 @@
+PASS Worker-1 -> LWP 331 -> futex 0x1214e2b0; identical lock-acquire stacks and post-detach syscalls
+PASS Worker-2 -> LWP 332 -> futex 0x12154e90; identical lock-acquire stacks and post-detach syscalls
+PASS 10 quoted native-stack/syscall lines match raw evidence
+PASS 15.141s between stack captures; log size unchanged at 2664 bytes
+PASS app UID 1000; 60-second observation; observer cleanup; no binary modification
+PASS original comparison/discovery evidence hashes unchanged (evidence index intentionally extended)
+PASS existing 6-case evidence assertions and all report links
+PASS Python syntax: capture_deadlock.py, verify_deadlock_diagnostics.py
+REVIEW #18: priorities use impact, current exhaustion risk, stalled work and recovery options
+REVIEW #18: four simultaneous-alert scenarios; P0/P1/P2 triggers, response targets and escalation
+REVIEW #18: minimum evidence, containment, SIGTERM/5s/SIGKILL decision, restart and last-resort reboot
+REVIEW #18: recovery progress, memory/cooldown cycles, recurrence and incident handoff criteria
+NOTE #18 thresholds/response targets are a proposed runbook, not measured simultaneous incident results
+NOTE external AI pre-evaluation has not been rerun
+PASS updated PDF: 17 pages; Korean text/tables/backtrace and runbook pages visually checked
+PASS updated PDF: required #15/#18 text, raw GDB/strace evidence, runbook and diagnostic scripts embedded
+PASS embedded ZIP CRC and SHA-256 manifest verified
+NOTE evidence/verification.txt describes the original 12-page submission; this audit describes its 17-page revision

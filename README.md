@@ -8,6 +8,7 @@
 - [OOM / MemoryGuard 보고서](reports/oom.md)
 - [CPU / Watchdog 보고서](reports/cpu.md)
 - [Deadlock 보고서](reports/deadlock.md)
+- [동시 장애 우선순위·대응 절차](reports/incident-runbook.md)
 - [보너스: 스케줄링 추론](reports/scheduling.md)
 - [원본 증거 안내](evidence/README.md), [통계 JSON](evidence/summary.json)
 
@@ -69,4 +70,15 @@ docker run --rm -v "$PWD:/work" b1-2-lab bash -c \
 python3 scripts/summarize.py
 ```
 
-[검증 기록](evidence/verification.txt)에 정적 검사, 원문 발췌 일치, 링크·수치·PDF 검수 결과를 보존했다. 보너스 결론은 앱의 FCFS와 부합하는 순차 패턴이며 Linux 커널 알고리즘 확정 주장이 아니다. 공개 저장소 [NiceTry3675/B1-2](https://github.com/NiceTry3675/B1-2) 또는 PDF 파일로 제출할 수 있다. PDF 본문과 첨부 자료는 GitHub 게시 전 작성된 실험 시점의 기록이다.
+[검증 기록](evidence/verification.txt)에 정적 검사, 원문 발췌 일치, 링크·수치·PDF 검수 결과를 보존했다. 보너스 결론은 앱의 FCFS와 부합하는 순차 패턴이며 Linux 커널 알고리즘 확정 주장이 아니다. 공개 저장소 [NiceTry3675/B1-2](https://github.com/NiceTry3675/B1-2) 또는 PDF 파일로 제출할 수 있다. PDF는 평가 FAIL #15·#18 보완 내용과 추가 진단 원본을 포함한다.
+
+## AI 사전평가 FAIL 항목 보완
+
+2026-09-05 16:12:29 평가에서 FAIL인 두 항목만 보완했다. 기존 OOM/CPU 비교 실험·통계는 유지했다. 아래 보완의 근거를 검증했으며 자동평가 재실행 결과를 받은 것은 아니다.
+
+| 항목 | 보완 내용 | 근거 |
+| --- | --- | --- |
+| #15 스택 직접 증거 | GDB 전체 스레드 backtrace 2회, strace write/futex, 디버거 분리 후 syscall 상태로 Worker-1/2 ↔ LWP ↔ 지속 락 대기 연결 | [Deadlock 추가 직접 증거](reports/deadlock.md), [원본 진단](evidence/deadlock/diagnostic-01/) |
+| #18 동시 장애 절차 | 영향·자원 고갈·업무 정지 기준 P0/P1/P2, 동시 알림 선택 사례, 증거→격리→재시작→검증·재평가 절차 | [운영 Runbook](reports/incident-runbook.md) |
+
+진단 재현은 `Dockerfile.diagnostics`와 `scripts/capture_deadlock.py`를 사용한다. 앱은 UID 1000을 유지하고 추적 도구에만 격리 컨테이너의 root/SYS_PTRACE 권한을 사용한다. 정확한 명령은 Deadlock 보고서에 있다. [보완 검증 기록](evidence/fail-remediation-verification.txt)을 함께 보존했다.

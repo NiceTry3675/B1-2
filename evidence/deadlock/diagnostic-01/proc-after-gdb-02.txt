@@ -1,0 +1,39 @@
+UTC 2026-09-05T07:28:41.360+00:00
+USER         PID    PPID     LWP STAT %CPU   RSS WCHAN                            COMMAND
+analyst       35      16      35 SNl   0.2 15940 futex_wait                       agent-leak-app-
+analyst       35      16     331 SNl   0.0 15940 futex_wait                       agent-leak-app-
+analyst       35      16     332 SNl   0.0 15940 futex_wait                       agent-leak-app-
+
+$ cat /proc/35/task/331/comm
+agent-leak-app-
+
+
+$ cat /proc/35/task/331/syscall
+202 0x1214e2b0 0x189 0x0 0x0 0x0 0xffffffff 0x7fe791a77290 0x7fe792c9b0d7
+
+
+$ cat /proc/35/task/331/wchan
+__futex_wait
+
+$ cat /proc/35/task/332/comm
+agent-leak-app-
+
+
+$ cat /proc/35/task/332/syscall
+202 0x12154e90 0x189 0x0 0x0 0x0 0xffffffff 0x7fe791276290 0x7fe792c9b0d7
+
+
+$ cat /proc/35/task/332/wchan
+__futex_wait
+
+$ cat /proc/35/task/35/comm
+agent-leak-app-
+
+
+$ cat /proc/35/task/35/syscall
+202 0x7fe78c000b70 0x189 0x0 0x0 0x0 0xffffffff 0x7ffe9808e2d0 0x7fe792c9b0d7
+
+
+$ cat /proc/35/task/35/wchan
+__futex_wait
+app.log bytes=2664
